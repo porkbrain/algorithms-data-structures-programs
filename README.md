@@ -11,7 +11,7 @@ Code comments often include citations from this book. Such citation includes a p
 ///
 ```
 
-Each data structure and algorithm (further refereed to as topics) is contained in their own module. Besides algorithm commentary, the code comments explain implementation. Tests are included to elaborate on how to use the API. They also help us validate the topics.
+Each data structure and algorithm (further referred to as topics) is contained in their own module. Besides algorithm commentary, the code comments explain implementation. Tests are included to elaborate on how to use the API. They also help us validate the topics.
 
 Each module is prefixed with an index. For example `001_binary_search.rs`. This is purely to organize the code repository. There are special modules which don't cover a standalone topic. They focus on integrating data structures with algorithms together.
 
