@@ -6,7 +6,8 @@ Code comments often include citations from this book. Such citation includes a p
 ///
 /// > An array is a homogeneous structure; it consists of components
 ///     which are all of the same type, called the _base type_.
-///     /
+///     \
+///     \
 ///     Niklaus Wirth 1976, 11
 ///
 ```

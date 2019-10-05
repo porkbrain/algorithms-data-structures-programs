@@ -6,7 +6,8 @@
 //!     called _bisection_ or _binary search_. In each repetition, the inspected
 //!     interval between indices *upper_bound* and *lower_bound* is bisected.
 //!     The number of required comparisons is therefore at most log2(N).
-//!     /
+//!     \
+//!     \
 //!     Niklaus Wirth 1976, 14
 //!
 //! The two bounds are inclusive points which the algorithm uses to remember
