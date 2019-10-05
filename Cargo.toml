@@ -1,9 +1,9 @@
 [package]
-name = "algorithms_data_programs"
+name = "algorithms_data_structures_programs"
 version = "0.1.0"
 authors = ["Michael Bausano <bausanomichal@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "algorithms_data_programs"
+name = "algorithms_data_structures_programs"
 path = "src/lib.rs"
