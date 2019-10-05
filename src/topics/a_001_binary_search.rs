@@ -18,7 +18,7 @@
 //! and upper bound (UB) on element `99`, which means we consider ALL elements
 //! of the array to potentially be the element we look for.
 //!
-//! ```ignore
+//! ```text
 //!     LB                                                          UB
 //! ____\/__________________________________________________________\/____
 //! |   4   ,   7   ,   9   ,   49   ,   50   ,   80   ,   85   ,   99   |
@@ -45,7 +45,7 @@
 //!
 //! In the next repetition, our bounds are refined and closer together.
 //!
-//! ```ignore
+//! ```text
 //!     LB              UB
 //! ____\/______________\/________________________________________________
 //! |   4   ,   7   ,   9   ,   49   ,   50   ,   80   ,   85   ,   99   |
