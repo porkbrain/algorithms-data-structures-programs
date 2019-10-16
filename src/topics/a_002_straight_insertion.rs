@@ -6,6 +6,7 @@
 //!     element of the source sequence is picked and transferred into the
 //!     destination sequence by inserting it at the appropriate place.
 //!     \
+//!     \
 //!     Niklaus Wirth 1976, 60
 //!
 //! In this implementation, the index `i` is represented by variable `tracker`.
@@ -76,14 +77,26 @@
 //! And this process repeats as long as `index < length`.
 //!
 //! This algorithm uses two operations: **comparisons** and **moves**. Moves are
-//! more expensive than comparisons. In the best case of already sorted array
-//! this algorithm does `C[min] = 2(n - 1)` and `M[min] = 0`.
+//! more expensive than comparisons.
+//!
+//! In the best case of already sorted array this algorithm does
+//! `C[min] = 2(n - 1)` and `M[min] = 0`. That's because there are `2`
+//! comparisons for each of `n` items except for the first one. Two comparisons
+//! come from the implementation: we compare the tracker to be greater than zero
+//! and then we compare the two neighbors. If the array is sorted, we don't need
+//! to move any element.
+//!
+//! In worst case scenario we repeat the while cycle `(n(n + 1) / 2) - 1` times.
+//! `C[max] = n^2 + n - 2` and `M[max] = (n(n + 1) / 2) - 1`.
+//!
+//! This puts the straight insertion into the `O(n^2)` family.
 //!
 //! > The least numbers occur if the items are originally in order; the worst
 //!     case occurs if the items are originally in reverse order. In this sense,
 //!     sorting by insertion exhibits a truly natural behavior. It is plain that
 //!     the given algorithm also describes a **stable storting process**:
 //!     it leaves the order of items with equal keys unchanged.
+//!     \
 //!     \
 //!     Niklaus Wirth 1976, 61
 
