@@ -118,7 +118,7 @@ pub fn straight_insertion<T>(array: &mut [T])
         // a) smallest element so far has been visited (on index 0);
         // b) an element smaller than tracker element has been visited.
         while tracker > 0 && array[tracker] < array[tracker - 1] {
-            // Swaps two elements in an array.
+            // Swaps two neighbours.
             array.swap(tracker, tracker - 1);
 
             // Decrement the tracker for next iteration.
