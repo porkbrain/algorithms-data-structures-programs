@@ -1,6 +1,5 @@
 //! # Sorting by Straight insertion
 //!
-//!
 //! > The items are divided into a destination sequence `a[0]..a[i]` and source
 //!     sequence `a[i]..a[n]`. In each step, starting with `i - 1`, the `i`th
 //!     element of the source sequence is picked and transferred into the
@@ -119,21 +118,8 @@ pub fn straight_insertion<T>(array: &mut [T])
         // a) smallest element so far has been visited (on index 0);
         // b) an element smaller than tracker element has been visited.
         while tracker > 0 && array[tracker] < array[tracker - 1] {
-            // Swaps two elements in an array. We resolve the pointers and then
-            // use `swap_nonoverlapping_one` method variant. This means that we
-            // guarantee that the two pointers don't overlap (this is always
-            // true as they both point to a single element) and we are copying
-            // just one region of memory to another.
-            //
-            // To hide the unsafe code with raw pointers, it would be synonymous
-            // to call `array.swap(tracker, tracker - 1)`.
-            // See https://doc.rust-lang.org/std/primitive.slice.html#method.swap.
-            unsafe {
-                let smaller: *mut T = &mut array[tracker];
-                let larger: *mut T = &mut array[tracker - 1];
-
-                std::ptr::swap_nonoverlapping(larger, smaller, 1);
-            }
+            // Swaps two elements in an array.
+            array.swap(tracker, tracker - 1);
 
             // Decrement the tracker for next iteration.
             tracker -= 1;
@@ -144,6 +130,7 @@ pub fn straight_insertion<T>(array: &mut [T])
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::test_helpers::is_sorted;
 
     #[test]
     fn it_handles_empty_array() {
@@ -213,6 +200,15 @@ mod tests {
     }
 
     #[test]
+    fn it_sorts_example() {
+        let mut array = vec![44, 55, 12, 42, 94, 18, 6, 67];
+
+        straight_insertion(&mut array);
+
+        assert!(is_sorted(&array));
+    }
+
+    #[test]
     fn fuzzy_test() {
         extern crate rand;
         use rand::prelude::SliceRandom;
@@ -225,9 +221,7 @@ mod tests {
 
             straight_insertion(&mut numbers);
 
-            for index in 1..numbers.len() {
-                assert!(numbers[index] >= numbers[index - 1]);
-            }
+            assert!(is_sorted(&numbers));
         }
     }
 }
