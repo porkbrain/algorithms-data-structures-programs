@@ -53,7 +53,7 @@ pub fn bubble_sort<T>(array: &mut [T])
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::test_helpers::is_sorted;
+    use crate::test_helpers::*;
 
     #[test]
     fn it_handles_empty_array() {
@@ -137,7 +137,7 @@ mod tests {
         use rand::prelude::SliceRandom;
 
         let mut rng = rand::thread_rng();
-        let mut numbers: Vec<u16> = (1..100).collect();
+        let mut numbers: Vec<u32> = (1..FUZZY_TEST_ITERATIONS).collect();
 
         for _ in 0..100 {
             numbers.shuffle(&mut rng);
