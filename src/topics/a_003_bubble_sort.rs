@@ -2,18 +2,22 @@
 //!
 //! > We make repeated passes over the array, each time sifting the least item
 //!     of the remaining set to the left end of the array.
+//!     \
 //!     ...
+//!     \
 //!     This algorithm easily lends itself to some improvements. An obvious
 //!     technique for improving this algorithm is to remember whether or not any
 //!     exchange had take place during a pass.
+//!     \
 //!     ...
+//!     \
 //!     A single misplaced bubble in the "heavy" end of an otherwise sorted
 //!     array will sift into order in a single pass, but a misplaced item in the
 //!     "light" end will sink toward its correct position only one step in each
 //!     pass. For example, the array
-//!     12 18 42 44 55 67 94 06
+//!     _12 18 42 44 55 67 94 06_
 //!     will be sorted by the improved Bubblesort in a single pass, but the array
-//!     94 06 12 18 42 44 55 67
+//!     _94 06 12 18 42 44 55 67_
 //!     will require seven passes for sorting. This unnatural asymmetry suggests
 //!     an improvement: alternating the direction of consecutive passes.
 //!     \
@@ -22,7 +26,9 @@
 //!
 //! Enough said about Bubblesort. Niklaus Wirth suggests few improvements to be
 //! implemented. Implementing these improvements promotes Bubblesort to
-//! Shakersort.
+//! [`shaker_sort`].
+//!
+//! [`shaker_sort`]: ../a_004_shaker_sort/fn.shaker_sort.html
 
 /// Takes a mutable slice of comparable elements and sorts them in ASC order.
 pub fn bubble_sort<T>(array: &mut [T])

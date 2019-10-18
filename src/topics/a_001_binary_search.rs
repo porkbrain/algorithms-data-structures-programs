@@ -74,8 +74,10 @@
 /// 1. We want to be able to tell whether two elements `T` are equal.
 /// 2. We want to be able to tell which of two elements `T` is larger.
 /// Rust has two traits which get the job done. Type `T` has to implement both
-/// [`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) and
-/// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
+/// [`PartialEq`] and [`PartialOrd`].
+///
+/// [`PartialEq`]: https://doc.rust-lang.org/std/cmp/trait.PartialEq.html
+/// [`PartialOrd`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html
 pub fn binary_search<T>(element: &T, array: &[T]) -> Option<usize>
     where
         T: PartialEq + PartialOrd,
