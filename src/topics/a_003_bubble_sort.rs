@@ -24,6 +24,7 @@
 //! implemented. Implementing these improvements promotes Bubblesort to
 //! Shakersort.
 
+/// Takes a mutable slice of comparable elements and sorts them in ASC order.
 pub fn bubble_sort<T>(array: &mut [T])
     where
         T: PartialEq + PartialOrd,
