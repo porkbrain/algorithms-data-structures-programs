@@ -154,8 +154,6 @@ mod tests {
 
         shaker_sort(&mut array);
 
-        println!("{:?}", array);
-
         assert!(is_sorted(&array));
     }
 
