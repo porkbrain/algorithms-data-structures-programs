@@ -1,4 +1,19 @@
 //! # Sorting by straight exchange: Shakersort
+//!
+//! An improved version of [`bubble_sort`]. Shakersort implements:
+//! - alternating between directions (left, right);
+//! - `last_exchange` pointer for eliminating redundant comparisons.
+//!
+//! > All improvements mentioned above do in no way affect the number of
+//!     exchanges; they only reduce the number of redundant double checks.
+//!     Unfortunately, an exchange of two items is generally a much more costly
+//!     operation than a comparison of keys; our clever improvements therefore
+//!     have a much less profound effect than one would intuitively expect.
+//!     \
+//!     \
+//!     Niklaus Wirth 1976, 68
+//!
+//! [`bubble_sort`]: ../a_003_bubble_sort/fn.bubble_sort.html
 
 /// Takes a mutable slice of comparable elements and sorts them in ASC order.
 pub fn shaker_sort<T>(array: &mut [T])
