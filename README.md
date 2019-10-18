@@ -20,7 +20,7 @@ Each module is prefixed with an index. For example `a_001_binary_search.rs`. Thi
 - [binary search algorithm](src/topics/a_001_binary_search.rs)
 - [sorting by straight insertion algorithm](src/topics/a_002_straight_insertion.rs)
 - [Bubblesort](src/topics/a_003_bubble_sort.rs)
-- [Shakersort](src/topics/a_003_shaker_sort.rs)
+- [Shakersort](src/topics/a_004_shaker_sort.rs)
 
 
 <!-- Invisible List of References -->
