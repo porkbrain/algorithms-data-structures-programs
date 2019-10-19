@@ -95,16 +95,16 @@ pub fn shell_sort<T>(array: &mut [T])
 
     // We use formula `t = floor( log(2) n ) - 1`. However, we want at least one
     // sort iteration, so a `max` function is used to prevent `t == 0`.
-    let sort_gaps_len = ((array.len() as f64).log2().floor() as usize - 1).max(1);
+    let gaps_len = ((array.len() as f64).log2().floor() as usize - 1).max(1);
     // Based on the length of gaps, we calculate each gap with formula
     // `gap = 2^i - 1`.
-    let sort_gaps: Vec<_> = (1..=sort_gaps_len)
+    let gaps: Vec<_> = (1..=gaps_len)
         .map(|x| 2f64.powi(x as i32) as usize - 1)
         .collect();
 
     // We want to start with the largest gap and work our way down to unity gap.
-    for gap_index in (0..sort_gaps_len).rev() {
-        let gap = sort_gaps[gap_index];
+    for gap_index in (0..gaps_len).rev() {
+        let gap = gaps[gap_index];
 
         // In standard straight insertion sort, we skipped first element. In
         // this refined version we have to skip first `gap` elements. These are
