@@ -76,7 +76,7 @@
 /// ```
 pub fn garbage_array_duplicates<T>(array: &mut [T]) -> usize
 where
-    T: PartialEq + PartialOrd,
+    T: PartialEq,
 {
     // If the array has just one or zero elements, it already adheres to the
     // constrains and we can just return the length.
