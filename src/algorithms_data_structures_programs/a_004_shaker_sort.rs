@@ -17,8 +17,8 @@
 
 /// Takes a mutable slice of comparable elements and sorts them in ASC order.
 pub fn shaker_sort<T>(array: &mut [T])
-    where
-        T: PartialEq + PartialOrd,
+where
+    T: PartialEq + PartialOrd,
 {
     // Guard for small arrays which are already "sorted".
     if array.len() < 2 {

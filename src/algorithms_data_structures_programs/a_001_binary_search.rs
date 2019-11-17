@@ -79,8 +79,8 @@
 /// [`PartialEq`]: https://doc.rust-lang.org/std/cmp/trait.PartialEq.html
 /// [`PartialOrd`]: https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html
 pub fn binary_search<T>(element: &T, array: &[T]) -> Option<usize>
-    where
-        T: PartialEq + PartialOrd,
+where
+    T: PartialEq + PartialOrd,
 {
     // We initialize the bounds to point to the first and last element.
     let mut lower_bound = 0;
@@ -92,7 +92,7 @@ pub fn binary_search<T>(element: &T, array: &[T]) -> Option<usize>
 
         // First loop invariant. If we found the element, return its index.
         if array[median] == *element {
-            return Some(median)
+            return Some(median);
         }
 
         // If the element we look for is larger, move the lower bound.
@@ -107,7 +107,7 @@ pub fn binary_search<T>(element: &T, array: &[T]) -> Option<usize>
         // the whole search space has been visited and the element is not
         // contained within it.
         if lower_bound > upper_bound {
-            return None
+            return None;
         }
     }
 }

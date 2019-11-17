@@ -1,5 +1,5 @@
 # Algorithms + Data Structures = Rust Programs
-This repository implements data structures and algorithms from **Niklaus Wirth's** book **[Algorithms + Data Structures = Programs](goodreads-main-link)**.
+This repository implements data structures and algorithms from interesting books I have read. Many of them are from **Niklaus Wirth's** book **[Algorithms + Data Structures = Programs](goodreads-main-link)**.
 
 Code comments often include citations from this book. Such citation includes a passage from the book, author's name, year of the publishing and page number.
 ```rust
