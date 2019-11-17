@@ -90,6 +90,8 @@ where
 
     // For each element except the first one, do...
     for index in 1..array.len() {
+        // If we don't have this element in the head yet, expand the head range
+        // by one element.
         if array[index] != array[new_len - 1] {
             array.swap(new_len, index);
             new_len += 1;
