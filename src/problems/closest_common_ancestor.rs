@@ -1,7 +1,8 @@
 //! # Problem
 //! Given a binary tree, find closest common ancestor of two nodes N, M. A node
 //! only knows about its two children if it has any. If the two node equal,
-//! return any of them.
+//! return their ancestor. If one of the nodes is equal to root, then return no
+//! node.
 //!
 //! ## Example
 //!
@@ -49,31 +50,32 @@ impl Default for Node {
 ///
 ///
 /// PS: Implemented the whole module in one go and all tests passed first time.
-pub fn closest_common_ancestor(root: &Rc<Node>, a: &Rc<Node>, b: &Rc<Node>) -> Option<Rc<Node>> {
-    // If either node is equal to the root node, return the root node.
-    if Rc::ptr_eq(root, a) || Rc::ptr_eq(root, b) {
-        return Some(Rc::clone(root));
+pub fn closest_common_ancestor(root: &Rc<Node>, n1: &Rc<Node>, n2: &Rc<Node>) -> Option<Rc<Node>> {
+    // If either node is equal to the root node, return none as it goes against
+    // logic for a node to be ancestor of itself and there is no ancestor for
+    // root.
+    if Rc::ptr_eq(root, n1) || Rc::ptr_eq(root, n2) {
+        return None;
     }
 
-    // If the two nodes are equal, return a pointer to any of them.
-    if Rc::ptr_eq(a, b) {
-        return Some(Rc::clone(a));
-    }
+    let (n1_index, n2_index) = index_of_two_nodes(n1, n2, root, 1);
+    let (mut n1_index, mut n2_index) = if Rc::ptr_eq(n1, n2) {
+        let n = n1_index.or(n2_index)?;
+        (n, n)
+    } else {
+        (n1_index?, n2_index?)
+    };
 
-    let (a, b) = index_of_two_nodes(a, b, root, 1);
-    let mut a = a?;
-    let mut b = b?;
-
-    while a != b {
-        if a > b {
-            a /= 2;
+    while n1_index != n2_index {
+        if n1_index > n2_index {
+            n1_index /= 2;
         } else {
-            b /= 2;
+            n2_index /= 2;
         }
     }
 
     const IS_ODD: usize = 0x1;
-    let mut ancestor_index = a;
+    let mut ancestor_index = n1_index;
     let mut path: Vec<bool> = Vec::with_capacity((ancestor_index as f64).sqrt() as usize);
 
     while ancestor_index != 1 {
@@ -168,7 +170,7 @@ mod tests {
 
     type Graph = [Rc<Node>; 16];
 
-    fn graph() -> Graph {
+    fn balanced_graph() -> Graph {
         let mut h: [Rc<Node>; 16] = Default::default();
 
         h[4] = Rc::new(Node::new(&h[8], &h[9]));
@@ -186,7 +188,7 @@ mod tests {
 
     #[test]
     fn solves_example() {
-        let g = graph();
+        let g = balanced_graph();
 
         let ancestor = closest_common_ancestor(&g[1], &g[12], &g[7]);
 
@@ -196,7 +198,7 @@ mod tests {
 
     #[test]
     fn returns_root_if_descendants_of_n2_and_n3() {
-        let g = graph();
+        let g = balanced_graph();
 
         let ancestor = closest_common_ancestor(&g[1], &g[13], &g[9]);
 
@@ -206,7 +208,7 @@ mod tests {
 
     #[test]
     fn if_nodes_equal_then_clone_one() {
-        let g = graph();
+        let g = balanced_graph();
 
         let ancestor = closest_common_ancestor(&g[1], &g[2], &g[2]);
 
@@ -215,22 +217,60 @@ mod tests {
     }
 
     #[test]
-    fn if_first_node_equal_root_then_clone_it() {
-        let g = graph();
+    fn if_first_node_equal_root_then_none() {
+        let g = balanced_graph();
 
         let ancestor = closest_common_ancestor(&g[1], &g[1], &g[2]);
 
-        assert!(ancestor.is_some());
-        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
+        assert!(ancestor.is_none());
     }
 
     #[test]
-    fn if_second_node_equal_root_then_clone_it() {
-        let g = graph();
+    fn if_second_node_equal_root_then_none() {
+        let g = balanced_graph();
 
         let ancestor = closest_common_ancestor(&g[1], &g[2], &g[1]);
 
-        assert!(ancestor.is_some());
-        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
+        assert!(ancestor.is_none());
+    }
+
+    #[test]
+    fn if_first_node_is_not_in_graph_then_none() {
+        let mut g = balanced_graph();
+        g[0] = Default::default();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[0], &g[2]);
+
+        assert!(ancestor.is_none());
+    }
+
+    #[test]
+    fn if_second_node_is_not_in_graph_then_none() {
+        let mut g = balanced_graph();
+        g[0] = Default::default();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[2], &g[0]);
+
+        assert!(ancestor.is_none());
+    }
+
+    #[test]
+    fn if_node_is_not_in_graph_then_none_not_root() {
+        let mut g = balanced_graph();
+        g[0] = Default::default();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[0], &g[1]);
+
+        assert!(ancestor.is_none());
+    }
+
+    #[test]
+    fn if_node_is_not_in_graph_then_none_not_itself() {
+        let mut g = balanced_graph();
+        g[0] = Default::default();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[0], &g[0]);
+
+        assert!(ancestor.is_none());
     }
 }
