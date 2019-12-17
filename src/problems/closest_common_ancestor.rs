@@ -203,4 +203,34 @@ mod tests {
         assert!(ancestor.is_some());
         assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
     }
+
+    #[test]
+    fn if_nodes_equal_then_clone_one() {
+        let g = graph();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[2], &g[2]);
+
+        assert!(ancestor.is_some());
+        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[2]));
+    }
+
+    #[test]
+    fn if_first_node_equal_root_then_clone_it() {
+        let g = graph();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[1], &g[2]);
+
+        assert!(ancestor.is_some());
+        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
+    }
+
+    #[test]
+    fn if_second_node_equal_root_then_clone_it() {
+        let g = graph();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[2], &g[1]);
+
+        assert!(ancestor.is_some());
+        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
+    }
 }
