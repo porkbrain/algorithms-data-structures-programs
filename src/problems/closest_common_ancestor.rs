@@ -193,4 +193,14 @@ mod tests {
         assert!(ancestor.is_some());
         assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[3]));
     }
+
+    #[test]
+    fn returns_root_if_descendants_of_n2_and_n3() {
+        let g = graph();
+
+        let ancestor = closest_common_ancestor(&g[1], &g[13], &g[9]);
+
+        assert!(ancestor.is_some());
+        assert!(Rc::ptr_eq(&ancestor.unwrap(), &g[1]));
+    }
 }
